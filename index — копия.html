@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хвеш | Портфолио :3 </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card-bg: rgba(20, 20, 20, 0.55);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      --card-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      --text-primary: #fff;
+      --text-secondary: rgba(255, 255, 255, 0.5);
+      --text-tertiary: rgba(255, 255, 255, 0.65);
+      --text-muted: rgba(255, 255, 255, 0.25);
+      --text-faint: rgba(255, 255, 255, 0.2);
+      --text-skill: rgba(255, 255, 255, 0.7);
+      --text-contact: rgba(255, 255, 255, 0.8);
+      --avatar-bg: linear-gradient(135deg, #333, #111);
+      --avatar-border: rgba(255, 255, 255, 0.08);
+      --avatar-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      --skill-bg: rgba(255, 255, 255, 0.06);
+      --skill-border: rgba(255, 255, 255, 0.06);
+      --skill-hover-bg: rgba(255, 255, 255, 0.12);
+      --skill-hover-border: rgba(255, 255, 255, 0.15);
+      --contact-bg: rgba(255, 255, 255, 0.04);
+      --contact-border: rgba(255, 255, 255, 0.06);
+      --contact-hover-bg: rgba(255, 255, 255, 0.1);
+      --contact-hover-border: rgba(255, 255, 255, 0.15);
+      --hr-color: rgba(255, 255, 255, 0.06);
+      --stat-label: rgba(255, 255, 255, 0.35);
+      --liquid-1: #fff;
+      --liquid-2: #aaa;
+      --liquid-3: #555;
+      --liquid-opacity: 0.15;
+      --toggle-border: rgba(255, 255, 255, 0.15);
+      --toggle-hover-bg: rgba(255, 255, 255, 0.08);
+      --svg-invert: none;
+      --js-icon-bg: #fff;
+    }
+
+    [data-theme="light"] {
+      --bg: #f0f0f0;
+      --card-bg: rgba(255, 255, 255, 0.6);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --card-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+      --card-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      --text-primary: #111;
+      --text-secondary: rgba(0, 0, 0, 0.45);
+      --text-tertiary: rgba(0, 0, 0, 0.6);
+      --text-muted: rgba(0, 0, 0, 0.25);
+      --text-faint: rgba(0, 0, 0, 0.2);
+      --text-skill: rgba(0, 0, 0, 0.65);
+      --text-contact: rgba(0, 0, 0, 0.75);
+      --avatar-bg: linear-gradient(135deg, #ddd, #bbb);
+      --avatar-border: rgba(0, 0, 0, 0.08);
+      --avatar-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --skill-bg: rgba(0, 0, 0, 0.04);
+      --skill-border: rgba(0, 0, 0, 0.06);
+      --skill-hover-bg: rgba(0, 0, 0, 0.08);
+      --skill-hover-border: rgba(0, 0, 0, 0.12);
+      --contact-bg: rgba(0, 0, 0, 0.03);
+      --contact-border: rgba(0, 0, 0, 0.06);
+      --contact-hover-bg: rgba(0, 0, 0, 0.06);
+      --contact-hover-border: rgba(0, 0, 0, 0.1);
+      --hr-color: rgba(0, 0, 0, 0.08);
+      --stat-label: rgba(0, 0, 0, 0.35);
+      --liquid-1: #888;
+      --liquid-2: #555;
+      --liquid-3: #ccc;
+      --liquid-opacity: 0.1;
+      --toggle-border: rgba(0, 0, 0, 0.15);
+      --toggle-hover-bg: rgba(0, 0, 0, 0.06);
+      --svg-invert: invert(1);
+      --js-icon-bg: #0a0a0a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+      transition: background 0.4s ease;
+    }
+
+    .bg-liquid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-liquid span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: liquid 12s ease-in-out infinite alternate;
+      transition: background 0.6s ease, opacity 0.6s ease;
+    }
+
+    .bg-liquid span:nth-child(1) {
+      width: 400px; height: 400px;
+      background: var(--liquid-1);
+      top: -10%; left: -5%;
+      animation-duration: 14s;
+      opacity: var(--liquid-opacity);
+    }
+
+    .bg-liquid span:nth-child(2) {
+      width: 350px; height: 350px;
+      background: var(--liquid-2);
+      top: 60%; right: -8%;
+      animation-duration: 10s;
+      animation-delay: -3s;
+      opacity: var(--liquid-opacity);
+    }
+
+    .bg-liquid span:nth-child(3) {
+      width: 300px; height: 300px;
+      background: var(--liquid-3);
+      bottom: -5%; left: 30%;
+      animation-duration: 16s;
+      animation-delay: -6s;
+      opacity: var(--liquid-opacity);
+    }
+
+    @keyframes liquid {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      25% { transform: translate(40px, -60px) scale(1.15) rotate(90deg); }
+      50% { transform: translate(-30px, 40px) scale(0.9) rotate(180deg); }
+      75% { transform: translate(50px, 30px) scale(1.1) rotate(270deg); }
+      100% { transform: translate(-40px, -50px) scale(0.95) rotate(360deg); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      background: var(--card-bg);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      padding: 48px 40px;
+      box-shadow: var(--card-shadow), var(--card-shadow-inset);
+      transition: transform 0.3s ease, background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 28px;
+      background: var(--avatar-bg);
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      color: var(--text-primary);
+      border: 1px solid var(--avatar-border);
+      box-shadow: var(--avatar-shadow);
+      user-select: none;
+      overflow: hidden;
+      transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 36px;
+      color: var(--text-primary);
+      text-align: center;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+      transition: color 0.4s ease;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      margin-bottom: 32px;
+      transition: color 0.4s ease;
+    }
+
+    .bio {
+      color: var(--text-tertiary);
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 0 4px;
+      transition: color 0.4s ease;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--text-primary);
+      transition: color 0.4s ease;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--stat-label);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+      transition: color 0.4s ease;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .skill {
+      background: var(--skill-bg);
+      border: 1px solid var(--skill-border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 13px;
+      color: var(--text-skill);
+      transition: all 0.25s ease, background 0.4s ease, border-color 0.4s ease;
+    }
+
+    .skill:hover {
+      background: var(--skill-hover-bg);
+      border-color: var(--skill-hover-border);
+      color: var(--text-primary);
+      transform: scale(1.04);
+    }
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--contact-border);
+      background: var(--contact-bg);
+      color: var(--text-contact);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.25s ease, background 0.4s ease, border-color 0.4s ease;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .contact-btn:hover {
+      background: var(--contact-hover-bg);
+      border-color: var(--contact-hover-border);
+      color: var(--text-primary);
+      transform: scale(1.02);
+    }
+
+    .contact-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 12px;
+      color: var(--text-faint);
+      transition: color 0.4s ease;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 16px;
+      transition: color 0.4s ease;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--hr-color);
+      margin: 28px 0;
+      transition: border-color 0.4s ease;
+    }
+
+    .toggle-theme {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      border: 1px solid var(--toggle-border);
+      background: var(--contact-bg);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease, background 0.4s ease, border-color 0.4s ease;
+      font-size: 18px;
+      z-index: 2;
+    }
+
+    .toggle-theme:hover {
+      background: var(--toggle-hover-bg);
+      color: var(--text-primary);
+      transform: scale(1.08);
+    }
+
+    .toggle-theme svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .music {
+      margin: 0 0 32px;
+    }
+
+    .music-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: 100px;
+      background: var(--skill-bg);
+      border: 1px solid var(--hr-color);
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .music-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--liquid-1), var(--liquid-3));
+      border-radius: 100px;
+      transition: width 0.1s linear;
+    }
+
+    .music-bar:hover {
+      height: 10px;
+    }
+
+    .music-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .music-track {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .music-volume {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+    }
+
+    .music-volume svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .music-volume input[type="range"] {
+      width: 60px;
+      height: 4px;
+      accent-color: var(--liquid-3);
+      cursor: pointer;
+    }
+
+    .skill svg {
+      transition: filter 0.4s ease;
+    }
+
+    [data-theme="light"] .skill svg {
+      filter: var(--svg-invert);
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 32px 24px; border-radius: 24px; }
+      h1 { font-size: 28px; }
+      .stats { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-liquid">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="card">
+    <button class="toggle-theme" id="themeToggle" aria-label="Переключить тему">
+      <svg viewBox="0 0 24 24" id="sunIcon"><path d="M12 3v1m0 16v1m-8-9H3m18 0h-1M5.636 5.636l.707.707m12.02 12.02l.707.707M5.636 18.364l.707-.707m12.02-12.02l.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <svg viewBox="0 0 24 24" id="moonIcon" style="display:none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <div class="avatar"><img src="ava.jpg" alt="Аватар"></div>
+    <h1>Дмитрий Хвешов</h1>
+    <p class="subtitle">Frontend Developer &middot; Web</p>
+
+    <p class="bio">
+      Разрабатываю сайты, веб-приложения и интерактивные визитки.
+      И вобще мурр~ мурр~ (:3)
+    </p>
+
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-value">3+</div>
+        <div class="stat-label">лет опыта</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">16</div>
+        <div class="stat-label">проектов</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">7</div>
+        <div class="stat-label">клиента</div>
+      </div>
+    </div>
+
+    <div class="section-title">Языки</div>
+    <div class="skills">
+      <span class="skill"><svg width="16" height="16" viewBox="0 0 32 32" style="vertical-align:middle;margin-right:6px"><path d="M15.885 2.677c-4.427.005-12.924 1.104-12.924 1.104s-2.047.361-2.047 2.182c0 1.724.047 4.932.047 7.99 0 1.979-.443 3.641 1.281 3.641h12.792V2.677z" fill="#fff"/><path d="M15.885 2.677c4.427.005 12.924 1.104 12.924 1.104s2.047.361 2.047 2.182c0 1.724-.047 4.932-.047 7.99 0 1.979.443 3.641-1.281 3.641H15.885V2.677z" fill="#fff" opacity=".7"/></svg>Python</span>
+      <span class="skill"><svg width="16" height="16" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px"><path d="M22.395 6q-.124-.323-.526-.599-.402-.277-1.342-.462l-3.438-.677-1.256-2.588q-.222-.487-.585-.744-.362-.256-.734-.256t-.735.256q-.363.257-.584.744l-1.256 2.588-3.438.677q-.94.185-1.342.462-.402.276-.526.599t-.03.65q.107.327.43.561l2.633 2.16-.78 3.502q-.148.669-.013.997.136.329.459.485.323.156.724.13.402-.028.833-.275l3.024-1.73 3.025 1.73q.43.247.832.275.402.026.725-.13.322-.156.458-.485.136-.328-.013-.997l-.78-3.502 2.633-2.16q.323-.234.43-.561t-.03-.65z" fill="#fff"/></svg>C++</span>
+      <span class="skill"><svg width="16" height="16" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px"><path d="M8.851 18.56s-.817.474.583.634c1.703.194 2.573.166 4.449-.188 0 0 .494.309 1.182.577-4.206 1.803-9.514-.118-6.214-1.023zm-.574-2.611s-.917.679.483.825c1.811.188 3.24.203 5.708-.276 0 0 .344.348.888.538-5.086 1.486-10.748.133-7.079-1.087zm6.317 4.307c.433-.35.824-.658.824-.658s-.009.274-.289.558c1.079.773 3.066 1.31 5.175 1.436-1.169 1.08-3.935 1.843-6.594 1.663 1.43-1.09 2.12-2.167 2.12-2.167l-1.236.168z" fill="#fff"/><path d="M21.335 19.804s.926.762-1.02 1.35c-3.702 1.114-15.411 1.45-18.664.045-1.169-.506 1.024-1.207 1.714-1.355.72-.149 1.13-.122 1.13-.122-1.3-.915-8.416 1.802-3.614 2.583 6.262 1.02 18.659.552 20.454-2.501z" fill="#fff"/><path d="M13.5 12.5c1.5 2 4 3 4 3s-4-.5-6-2-3-3-3-3 1.5 1 5 2z" fill="#fff" opacity=".6"/></svg>Java</span>
+      <span class="skill"><svg width="16" height="16" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px;background:#fff;border-radius:2px;padding:1px"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.587-1.803-1.053-.395-.754.036-1.184.395-1.434.592-.401 1.169-.496 1.169-.496l.063-.065c-.58-.775-1.506-.826-1.506-.826l-.918.052c-.697.12-1.36.542-1.736 1.092-.525.767-.49 1.884-.135 2.57.596 1.177 1.89 1.576 3.377 1.953.953.255 1.13.587 1.13.993 0 .707-.802.898-1.186.93-1.066.086-1.689-.139-1.689-.139l-.09.082c.551.92 1.575 1.162 2.277 1.162 1.065 0 2.158-.388 2.306-1.562.003-.396.003-.698.003-.698zm-13.22-3.515h2.208l.001-5.991h-2.208v5.991zm3.326 0h2.209v-9.899h-2.209v9.899zm-9.738 0h2.212v-5.068c0-2.39.764-3.832 3.46-3.832.361 0 .702.034 1.043.091.151.026.286.06.444.098v2.063c-.197-.039-.383-.078-.585-.092-.277-.019-.549-.028-.803-.028-1.296 0-1.771.665-1.771 2.057v3.761zm17.86-3.965c0 .255.004.504-.01.752h4.627v2.765h-3.04c.913 1.023 2.519 1.461 4.036 1.068.858-.222 1.543-.635 1.543-.635v2.105c-1.128.545-2.416.675-3.458.549-1.86-.225-3.222-1.205-3.977-2.689-.489-.96-.612-2.006-.612-2.848 0-2.215.89-4.129 3.076-4.78 1.368-.41 3.024-.204 4.158.638.62.46.993 1.015.993 1.015l-1.758 1.152s-.379-.52-1.101-.734c-.934-.277-2.192-.132-2.699.56-.304.416-.483.943-.483 1.656z" fill="#0a0a0a"/></svg>JavaScript</span>
+      <span class="skill"><svg width="16" height="16" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px"><path d="M4.192 3.143h15.615l-1.42 16.054-6.36 2.66-6.404-2.66L4.192 3.143z" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M7.86 11.235h2.5l.223 2.219 1.262.464 1.316-.464.166-1.858h-4.22l-.428-2.63h6.91l.247-2.632H7.86z" fill="#fff"/></svg>CSS</span>
+      <span class="skill"><svg width="16" height="16" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z" fill="#fff"/></svg>Lua</span>
+    </div>
+
+    <div class="music">
+      <div class="music-bar" id="musicBar" title="Музыка">
+        <div class="music-fill" id="musicFill"></div>
+      </div>
+      <div class="music-meta">
+        <span class="music-track">Garcon Maigre — Перемотка: popstar :3</span>
+        <span class="music-volume">
+          <svg width="14" height="14" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7"/></svg>
+          <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8">
+        </span>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="section-title">Контакты</div>
+    <div class="contacts">
+      <a class="contact-btn" href="mailto:xweeeesh@gmail.com">
+        <svg viewBox="0 0 24 24"><path d="M4 6l8 5.5L20 6M4 6v12a2 2 0 002 2h12a2 2 0 002-2V6M4 6h16"/></svg>
+        xweeeesh@gmail.com (Не работает)
+      </a>
+      <a class="contact-btn" href="https://t.me/xweshcode" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M21.5 4.5l-19 7.5 5.5 2.5 2.5 7 4-4 6 4.5z"/></svg>
+        Telegram channel (Просто по приколу)
+      </a>
+      <a class="contact-btn" href="https://t.me/xwesh" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M21.5 4.5l-19 7.5 5.5 2.5 2.5 7 4-4 6 4.5z"/></svg>
+        @xwesh (По делам)
+      </a>
+      <a class="contact-btn" href="https://www.testdome.com/certificates/b9d5a6f20ab247cdac43f92521021dfe" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M21.5 4.5l-19 7.5 5.5 2.5 2.5 7 4-4 6 4.5z"/></svg>
+        Сертификат
+      </a>
+    </div>
+
+    <div class="footer">&copy; 2026 &mdash; Дмитрий Хвешов</div>
+  </div> 
+
+  <audio id="bgMusic" loop>
+    <source src="music.mp4" type="audio/mp4">
+  </audio>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const sun = document.getElementById('sunIcon');
+    const moon = document.getElementById('moonIcon');
+
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      sun.style.display = 'none';
+      moon.style.display = '';
+    }
+
+    toggle.addEventListener('click', () => {
+      const html = document.documentElement;
+      const isLight = html.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        sun.style.display = '';
+        moon.style.display = 'none';
+      } else {
+        html.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        sun.style.display = 'none';
+        moon.style.display = '';
+      }
+    });
+
+    const music = document.getElementById('bgMusic');
+    const musicBar = document.getElementById('musicBar');
+    const musicFill = document.getElementById('musicFill');
+    const volume = document.getElementById('volume');
+
+    music.addEventListener('timeupdate', () => {
+      if (music.duration) {
+        musicFill.style.width = (music.currentTime / music.duration * 100) + '%';
+      }
+    });
+
+    musicBar.addEventListener('click', (e) => {
+      if (music.duration) {
+        const rect = musicBar.getBoundingClientRect();
+        const ratio = (e.clientX - rect.left) / rect.width;
+        music.currentTime = ratio * music.duration;
+      }
+    });
+
+    volume.addEventListener('input', () => {
+      music.volume = parseFloat(volume.value);
+    });
+
+    const tryPlay = () => {
+      music.play().catch(() => {});
+      window.removeEventListener('click', tryPlay);
+    };
+    window.addEventListener('click', tryPlay);
+  </script>
+</body>
+</html>
